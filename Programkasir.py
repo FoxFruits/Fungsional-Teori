@@ -95,6 +95,7 @@ def hapus_barang(username):
     else:
         print("Anda tidak memiliki akses untuk menghapus barang.")
         
+<<<<<<< HEAD
 def lihat_keranjang_pembeli(username):
     if akun[username]['role'] == 'pembeli':
         keranjang = akun[username]['keranjang']
@@ -133,6 +134,34 @@ def beli_barang(username):
                     print("Anda sudah membeli barang ini.")
                 return
             
+=======
+def lihat_barang_pembeli(username):
+    global barang
+    if akun[username]['role'] == 'pembeli':
+        print("Daftar Barang:")
+        for barang in barang:
+            if barang['stok'] > 0:
+                print(f"ID Barang: {barang['id']} | Nama Barang: {barang['nama']} | Stok: {barang['stok']} | Harga: Rp {barang['harga']}")
+    else:
+        print("Anda tidak memiliki akses untuk melihat daftar barang.")
+        
+def beli_barang(username):
+    if akun[username]['role'] == 'pembeli':
+        print("Daftar Barang:")
+        for barang in barang:
+            if barang['stok'] > 0:
+                print(f"ID Barang: {barang['id']} | Nama Barang: {barang['nama']} | Stok: {barang['stok']} | Harga: Rp {barang['harga']}")
+        id_barang = input("Masukkan ID barang yang ingin dibeli: ")
+        for barang in barang:
+            if barang['id'] == id_barang and barang['stok'] > 0:
+                if barang not in akun[username]['keranjang']:
+                    akun[username]['keranjang'].append({'id': barang['id'], 'nama': barang['nama'], 'harga': barang['harga']})
+                    barang['stok'] -= 1
+                    print(f"Barang '{barang['nama']}' berhasil dibeli.")
+                else:
+                    print("Anda sudah membeli barang ini.")
+                return
+>>>>>>> e3eceba922559fb9768d8ef9e8920c711911d7e3
         print("ID barang tidak valid atau stok habis.")
     else:
         print("Anda tidak memiliki akses untuk membeli barang.")
@@ -166,11 +195,19 @@ def display_menu_pembeli(username):
         print("4. Logout")
         choice = input("Pilih: ")
         if choice == "1":
+<<<<<<< HEAD
             lihat_barang(username)
         elif choice == "2":
             beli_barang(username)
         elif choice == "3":
             lihat_keranjang_pembeli(username)
+=======
+            lihat_barang_pembeli(username)
+        elif choice == "2":
+            beli_barang(username)
+        elif choice == "3":
+            lihat_barang_pembeli(username)
+>>>>>>> e3eceba922559fb9768d8ef9e8920c711911d7e3
         elif choice == "4":
             print("Berhasil Logout")
             break
